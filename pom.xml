@@ -6,6 +6,8 @@
     <modules>
         <module>redis-distributed-lock-core</module>
 		<module>redis-distributed-lock-web-test</module>
+        <module>mogodb</module>
+		<module>elastic</module>
 	</modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>

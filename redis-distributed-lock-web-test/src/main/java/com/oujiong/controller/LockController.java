@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @Description: 不基于注解方式锁操作
  *
@@ -42,17 +44,24 @@ public class LockController {
 
     @GetMapping("trylock-decrease-stock")
     public String trylockDecreaseStock() throws InterruptedException {
-        if (redissonLock.tryLock("trylock", 5L, 200L)) {
-            if (TOTAL > 0) {
-                TOTAL--;
-            }
-            Thread.sleep(50);
-            redissonLock.unlock("trylock");
-            log.info("====tryLock===减完库存后,当前库存===" + TOTAL);
-        } else {
-            log.info("[ExecutorRedisson]获取锁失败");
+        Long id   = Thread.currentThread().getId();
+        if (redissonLock.tryLock("trylock", 3L,3L)) {
+            log.info("====tryLock=== " +id );
+            Thread.sleep(10000);
+            if(redissonLock.isHeldByCurrentThread("trylocl"))
+                redissonLock.unlock("trylock");
+            log.info("====  tryLock   unlock=== " + id );
+        }
+        else
+            {
+            log.info("[ExecutorRedisson]获取锁失败"   + Thread.currentThread().getId());
         }
         return "===================================";
+    }
+
+
+    public static void main(String[] args) {
+       // getLock = rLock.tryLock( waitTime,leaseTime, TimeUnit.SECONDS);
     }
 
 
