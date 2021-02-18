@@ -8,6 +8,7 @@
 		<module>redis-distributed-lock-web-test</module>
         <module>mogodb</module>
 		<module>elastic</module>
+		<module>rocket-mq</module>
 	</modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
