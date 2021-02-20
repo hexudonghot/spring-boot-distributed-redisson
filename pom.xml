@@ -9,7 +9,8 @@
         <module>mogodb</module>
 		<module>elastic</module>
 		<module>rocket-mq</module>
-	</modules>
+        <module>common</module>
+    </modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -67,6 +68,14 @@
 			<artifactId>redisson</artifactId>
 			<version>3.5.4</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.6</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
