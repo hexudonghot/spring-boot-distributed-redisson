@@ -60,8 +60,50 @@ public class LockController {
     }
 
 
+
+
+    @GetMapping("trylock-stock")
+    public String trylockStock() throws InterruptedException {
+
+        if (redissonLock.tryLock("trylock", 5L))
+        {
+
+            String  id   = Thread.currentThread().getName();
+
+            Long   idd   = Thread.currentThread().getId();
+            log.info("tryLock   get lock=== " + id     +"     "   +idd);
+            Thread.sleep(2000);
+            if(redissonLock.isHeldByCurrentThread("trylock"))
+            {
+                redissonLock.unlock("trylock");
+                //log.info("tryLock   unlock=== " + id );
+            }
+        }
+        else
+        {
+            log.info("[ExecutorRedisson]获取锁失败"   + Thread.currentThread().getId());
+        }
+        return "===================================";
+    }
+
+
+
+
     public static void main(String[] args) {
-       // getLock = rLock.tryLock( waitTime,leaseTime, TimeUnit.SECONDS);
+        long time = TimeUnit.SECONDS.toMillis(5L);
+        System.out.println(time);
+        long current = System.currentTimeMillis();
+
+        time -= (System.currentTimeMillis() - current);
+        System.out.println(time);
+        if (time <= 0) {
+            System.out.println(222222);
+        }
+
+
+        int a =3;
+        a -=4;
+        System.out.println(a);
     }
 
 

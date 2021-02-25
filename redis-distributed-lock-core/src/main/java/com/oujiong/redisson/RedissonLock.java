@@ -54,9 +54,11 @@ public class RedissonLock {
     public boolean tryLock(String lockName, long leaseTime) {
 
         RLock rLock = redisson.getLock(lockName);
+        log.error("dddddddddddddddddddddddd");
         boolean getLock = false;
         try {
             getLock = rLock.tryLock( leaseTime, TimeUnit.SECONDS);
+            log.error("eeeeeeeeeeeeeeeeeeeeeeee");
         } catch (InterruptedException e) {
             log.error("获取Redisson分布式锁[异常]，lockName=" + lockName, e);
             e.printStackTrace();
