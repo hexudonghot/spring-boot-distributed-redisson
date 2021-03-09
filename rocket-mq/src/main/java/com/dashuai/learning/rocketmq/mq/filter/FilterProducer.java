@@ -28,10 +28,10 @@ public class FilterProducer {
         try {
             message = new Message("TopicTest2",
                     "test2",
-                    ("Hello RocketMQ " + msg).getBytes(RemotingHelper.DEFAULT_CHARSET)
+                    ("Hello RocketMQ " + 1).getBytes(RemotingHelper.DEFAULT_CHARSET)
             );
             //设置用户属性，可以用来做条件过滤
-            message.putUserProperty("a", String.valueOf(msg));
+            message.putUserProperty("a", String.valueOf(1));
             result = mqProducer.send(message);
         } catch (MQClientException | RemotingException | MQBrokerException | InterruptedException | UnsupportedEncodingException e) {
             e.printStackTrace();
